@@ -1,16 +1,22 @@
-import React from 'react';
+import React, {useState} from 'react';
 import Header from "./ui/Header";
 import { createMuiTheme, makeStyles, ThemeProvider } from '@material-ui/core/styles';
 import {BrowserRouter, Route, Switch} from "react-router-dom";
 import theme from './ui/Theme';
+import Footer from "./ui/Footer";
+import LandingPage from "./LandingPage";
 
 function App() {
+
+    const [value, setValue] = useState(0);
+    const [selectedIndex, setSelectedIndex] = useState(0);
+
     return (
         <ThemeProvider theme={theme}>
             <BrowserRouter>
-                <Header/>
+                <Header value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}/>
                 <Switch>
-                    <Route exact path="/" component={() => <div>home</div>}/>
+                    <Route exact path="/" component={LandingPage} />
                     <Route exact path="/services" component={() => <div>services</div>}/>
                     <Route exact path="/customsoftware" component={() => <div>custom software</div>}/>
                     <Route exact path="/mobileapps" component={() => <div>mobile apps</div>}/>
@@ -20,6 +26,7 @@ function App() {
                     <Route exact path="/contact" component={() => <div>contact us</div>}/>
                     <Route exact path="/estimate" component={() => <div>estimate</div>}/>
                 </Switch>
+                <Footer value={value} setValue={setValue} selectedIndex={selectedIndex} setSelectedIndex={setSelectedIndex}/>
             </BrowserRouter>
 
             {[...new Array(120)]
